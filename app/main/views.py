@@ -49,6 +49,28 @@ def streamingserie(name):
     ip = str(get('https://ipapi.co/ip/').text)
     return render_template('streaming.html', name=name, ip=ip)
 
+@main.route('/films/<name>/rating', methods=['GET', 'POST'])
+@login_required
+def rating(name):
+    form = RatingForm()
+    if form.validate_on_submit():
+        number = form.number.data
+        hash = 'random'
+        username = current_user.username
+        check = Rating_class.query.filter_by(movie_hash=name + username)
+        for i in check:
+            hash = i.movie_hash
+
+        if hash == name + username:
+            flash('You have already rated this movie')
+            return render_template('rating.html', name=name, form=form)
+        else:
+            entry = Rating_class(movie_hash=name + username, movie_name=name, rating=number,username=username)
+            db.session.add(entry)
+            db.session.commit()
+            return redirect(url_for('main.films'))
+    return render_template('rating.html', name=name, form=form)
+
 # About tab
 @main.route('/about')
 @login_required
