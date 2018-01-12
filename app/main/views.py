@@ -4,12 +4,12 @@ from flask_login import login_required, current_user
 from flask_sqlalchemy import get_debug_queries
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, PostForm,\
-    CommentForm
+    CommentForm, RatingForm
 from .. import db
 from .. import mongo
-from ..models import Permission, Role, User, Post, Comment
+from ..models import Permission, Role, User, Post, Comment, Rating_class
 from ..decorators import admin_required, permission_required
-import socket
+from requests import get
 
 # List of films tab
 @main.route('/films')
@@ -39,14 +39,14 @@ def series():
 @main.route('/films/<name>')
 @login_required
 def streaming(name):
-    ip = socket.gethostbyname(socket.gethostname())
+    ip = str(get('https://ipapi.co/ip/').text)
     return render_template('streaming.html', name=name, ip=ip)
 
 # Stream specific serie tab
 @main.route('/series/<name>')
 @login_required
 def streamingserie(name):
-    ip = socket.gethostbyname(socket.gethostname())
+    ip = str(get('https://ipapi.co/ip/').text)
     return render_template('streaming.html', name=name, ip=ip)
 
 # About tab
