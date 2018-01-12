@@ -47,4 +47,5 @@ def downgrade():
     op.drop_index('ix_users_username', 'users')
     op.drop_table('users')
     op.drop_table('roles')
+    op.drop_table('ratings')
     ### end Alembic commands ###
