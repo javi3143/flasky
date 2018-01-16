@@ -1,5 +1,10 @@
 version: '3'
 services:
+  recengine:
+    image: "acobley/tfrecomm"
+    ports:
+      - "82:81"
+    restart: always
   mongodb:
     image: "javi3143/mongocatalogue"
     ports:
