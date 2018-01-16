@@ -1,13 +1,19 @@
 version: '3'
 services:
+  nginx:
+    image: "javi3143/nginxvideo"
+    ports:
+      - "81:1935"
+      - "84:80"
+    restart: always
   flasky:
     build: .
     ports:
       - "8000:5000"
     env_file: .env
-    restart: always
     links:
       - mysql:dbserver
+    restart: always
   mysql:
     image: "mysql/mysql-server:5.7"
     env_file: .env-mysql
