@@ -2,7 +2,7 @@ version: '3'
 services:
   recengine:
     image: "acobley/tfrecomm"
-    container_name:rec
+    container_name: rec
     ports:
       - "82:81"
     restart: always
