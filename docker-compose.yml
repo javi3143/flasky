@@ -6,7 +6,7 @@ services:
       - "81:1935"
       - "84:80"
     restart: always
-  flasky:
+  myflix:
     build: .
     ports:
       - "80:5000"
