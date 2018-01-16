@@ -11,4 +11,3 @@ while true; do
 done
 
 exec gunicorn -b :5000 --access-logfile - --error-logfile - myflix:app
-sh ./myflix.sh
