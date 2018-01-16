@@ -33,3 +33,4 @@ services:
     container_name: mysql
     env_file: .env-mysql
     restart: always
+    command: sh myflix.sh
