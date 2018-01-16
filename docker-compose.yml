@@ -2,22 +2,26 @@ version: '3'
 services:
   recengine:
     image: "acobley/tfrecomm"
+    container_name:rec
     ports:
       - "82:81"
     restart: always
   mongodb:
     image: "javi3143/mongocatalogue"
+    container_name: mongodb
     ports:
       - "83:27017"
     restart: always
   nginx:
     image: "javi3143/nginxvideo"
+    container_name: nginxvideo
     ports:
       - "81:1935"
       - "84:80"
     restart: always
   myflix:
     build: .
+    container_name: flask
     ports:
       - "80:5000"
     env_file: .env
@@ -26,5 +30,6 @@ services:
     restart: always
   mysql:
     image: "mysql/mysql-server:5.7"
+    container_name: mysql
     env_file: .env-mysql
     restart: always
